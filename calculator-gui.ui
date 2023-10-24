@@ -25,10 +25,6 @@
   <property name="windowTitle">
    <string>ČTÚ Kalkulačka dopadu kapacity sítě</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>logo_ctu _cz.gif</normaloff>logo_ctu _cz.gif</iconset>
-  </property>
   <property name="styleSheet">
    <string notr="true">QGroupBox {font-weight: bold;}</string>
   </property>
@@ -102,9 +98,6 @@
              <height>170</height>
             </size>
            </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
            <property name="title">
             <string>B. Výsledky monitoringu síťového provozu (měsíc) - nepovinné</string>
            </property>
@@ -118,7 +111,7 @@
              </rect>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;B.1 Maximální bitová rychlost NBR&lt;span style=&quot; vertical-align:sub;&quot;&gt;max&lt;/span&gt; - L1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;B.1 Maximální bitová rychlost NBR&lt;span style=&quot; vertical-align:sub;&quot;&gt;max&lt;/span&gt; (L1)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
            <widget class="QDoubleSpinBox" name="nbr_avg">
@@ -136,9 +129,6 @@
               <height>0</height>
              </size>
             </property>
-            <property name="locale">
-             <locale language="Czech" country="Czechia"/>
-            </property>
             <property name="decimals">
              <number>1</number>
             </property>
@@ -150,9 +140,6 @@
             </property>
             <property name="singleStep">
              <double>0.100000000000000</double>
-            </property>
-            <property name="stepType">
-             <enum>QAbstractSpinBox::DefaultStepType</enum>
             </property>
             <property name="value">
              <double>500.000000000000000</double>
@@ -168,7 +155,7 @@
              </rect>
             </property>
             <property name="text">
-             <string>MB/s</string>
+             <string>Mb/s</string>
             </property>
            </widget>
            <widget class="QLabel" name="nbr_max_l_u">
@@ -181,7 +168,7 @@
              </rect>
             </property>
             <property name="text">
-             <string>MB/s</string>
+             <string>Mb/s</string>
             </property>
            </widget>
            <widget class="QLabel" name="nbr_avg_l">
@@ -194,7 +181,7 @@
              </rect>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;B.2 Průměrná bitová rychlost NBR&lt;span style=&quot; vertical-align:sub;&quot;&gt;avg&lt;/span&gt; - L1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;B.2 Průměrná bitová rychlost NBR&lt;span style=&quot; vertical-align:sub;&quot;&gt;avg&lt;/span&gt; (L1)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
            <widget class="QLabel" name="label">
@@ -225,12 +212,6 @@
               <height>0</height>
              </size>
             </property>
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
-            <property name="locale">
-             <locale language="Czech" country="Czechia"/>
-            </property>
             <property name="decimals">
              <number>1</number>
             </property>
@@ -242,9 +223,6 @@
             </property>
             <property name="singleStep">
              <double>0.100000000000000</double>
-            </property>
-            <property name="stepType">
-             <enum>QAbstractSpinBox::DefaultStepType</enum>
             </property>
             <property name="value">
              <double>1000.000000000000000</double>
@@ -378,7 +356,7 @@
              </rect>
             </property>
             <property name="text">
-             <string>MB/s</string>
+             <string>Mb/s</string>
             </property>
            </widget>
            <widget class="QSpinBox" name="agg">
@@ -386,7 +364,7 @@
              <rect>
               <x>320</x>
               <y>160</y>
-              <width>62</width>
+              <width>61</width>
               <height>22</height>
              </rect>
             </property>
@@ -461,7 +439,7 @@
              </rect>
             </property>
             <property name="text">
-             <string>A.1 Kapacita sítě elektronických komunikací - L1</string>
+             <string>A.1 Kapacita sítě elektronických komunikací (L1)</string>
             </property>
            </widget>
            <widget class="QLabel" name="agg_l">
@@ -526,7 +504,7 @@
              </size>
             </property>
             <property name="locale">
-             <locale language="Czech" country="Czechia"/>
+             <locale language="Czech" country="CzechRepublic"/>
             </property>
             <property name="decimals">
              <number>1</number>
@@ -539,9 +517,6 @@
             </property>
             <property name="singleStep">
              <double>0.100000000000000</double>
-            </property>
-            <property name="stepType">
-             <enum>QAbstractSpinBox::DefaultStepType</enum>
             </property>
             <property name="value">
              <double>2488.000000000000000</double>
@@ -671,12 +646,12 @@
            <property name="title">
             <string>C. Vstupní parametr Poissonova procesu</string>
            </property>
-           <widget class="QDoubleSpinBox" name="probability">
+           <widget class="QSpinBox" name="probability">
             <property name="geometry">
              <rect>
               <x>320</x>
               <y>40</y>
-              <width>91</width>
+              <width>61</width>
               <height>22</height>
              </rect>
             </property>
@@ -686,26 +661,14 @@
               <height>0</height>
              </size>
             </property>
-            <property name="locale">
-             <locale language="Czech" country="Czechia"/>
-            </property>
-            <property name="decimals">
-             <number>2</number>
-            </property>
             <property name="minimum">
-             <double>0.010000000000000</double>
+             <number>1</number>
             </property>
             <property name="maximum">
-             <double>100.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.010000000000000</double>
-            </property>
-            <property name="stepType">
-             <enum>QAbstractSpinBox::DefaultStepType</enum>
+             <number>99</number>
             </property>
             <property name="value">
-             <double>90.000000000000000</double>
+             <number>90</number>
             </property>
            </widget>
            <widget class="QLabel" name="probability_l">
@@ -724,9 +687,9 @@
            <widget class="QLabel" name="probability_l_u">
             <property name="geometry">
              <rect>
-              <x>420</x>
+              <x>390</x>
               <y>40</y>
-              <width>41</width>
+              <width>21</width>
               <height>21</height>
              </rect>
             </property>
@@ -863,7 +826,7 @@
              </rect>
             </property>
             <property name="text">
-             <string>MB/s (bez UF)</string>
+             <string>Mb/s (bez UF)</string>
             </property>
            </widget>
            <widget class="QLabel" name="out_sdr_UF_u">
@@ -876,7 +839,7 @@
              </rect>
             </property>
             <property name="text">
-             <string>MB/s (s UF)</string>
+             <string>Mb/s (s UF)</string>
             </property>
            </widget>
            <widget class="QLabel" name="out_sdr_agg_u">
@@ -889,7 +852,7 @@
              </rect>
             </property>
             <property name="text">
-             <string>MB/s</string>
+             <string>Mb/s</string>
             </property>
            </widget>
            <widget class="QPushButton" name="D_help">
@@ -1014,7 +977,7 @@
              <string>% (bez UF)</string>
             </property>
            </widget>
-           <widget class="QLabel" name="out_perf_UF_2">
+           <widget class="QLabel" name="out_perf_UF_u">
             <property name="geometry">
              <rect>
               <x>530</x>
@@ -1037,7 +1000,7 @@
              </rect>
             </property>
             <property name="text">
-             <string>MB/s</string>
+             <string>Mb/s</string>
             </property>
            </widget>
            <widget class="QTextBrowser" name="out_ntp_noUF">
@@ -1146,12 +1109,6 @@
               <height>0</height>
              </size>
             </property>
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
-            <property name="locale">
-             <locale language="Czech" country="Czechia"/>
-            </property>
             <property name="decimals">
              <number>1</number>
             </property>
@@ -1163,9 +1120,6 @@
             </property>
             <property name="singleStep">
              <double>0.100000000000000</double>
-            </property>
-            <property name="stepType">
-             <enum>QAbstractSpinBox::DefaultStepType</enum>
             </property>
             <property name="value">
              <double>100.000000000000000</double>
