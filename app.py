@@ -6,21 +6,30 @@ PyQT library/framework - free-to-use, licensed under GNU General Public License 
  - source code sharing is needed (using GPL libs means derived work) !!!
  - PySide = alternative, where code sharing is not required
 
+icon created with https://www.icoconverter.com/
+
 convert script to executable 
-- https://www.geeksforgeeks.org/convert-python-script-to-exe-file/
-- https://datatofish.com/executable-pyinstaller/
-- https://medium.com/analytics-vidhya/how-to-build-your-first-desktop-application-in-python-7568c7d74311
-
+- https://www.pythonguis.com/tutorials/packaging-pyqt6-applications-windows-pyinstaller/
+pyinstaller -n="NetCalculator" -w --onefile --add-data="logo_ctu_cz.ico;." --icon=logo_ctu_cz.ico .\app.py
 """
-
+import os
 from PyQt6.QtWidgets import QApplication, QMainWindow
-from app_gui import Ui_AppMainWindow # UI created in QtDesigner
+from PyQt6.QtGui import QIcon
 
+from app_gui import Ui_AppMainWindow # UI created in QtDesigner: pyuic6 .\calculator-gui.ui -o app_gui.py
 import app_calc as ac
 #import locale
 #locale.setlocale(locale.LC_ALL, "") # not working
 
+basedir = os.path.dirname(__file__)
 
+# Windows - unique application id for icon showing on the taskbar
+try:
+    from ctypes import windll  # Only exists on Windows.
+    myappid = "CTO.NetCalculator.2023-10-24"
+    windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+except ImportError:
+    pass
 
 # Subclass QMainWindow to customize the application's main window
 class CalculatorMainWindow(QMainWindow):
@@ -33,27 +42,165 @@ class CalculatorMainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         #self.setWindowTitle("CTO Net Capacity Impact Calculator") # rewrite window title
+        self.setWindowIcon(QIcon(os.path.join(basedir, "logo_ctu_cz.ico")))
+        
+        ## SECTION B
         
         # handling of Utilization Factor
         self.ui.out_uf.append( ac.prepare_UF(nbr_max=self.ui.nbr_max.value(), nbr_avg=self.ui.nbr_avg.value()) ) # initial value setting
         self.ui.nbr_max.valueChanged.connect(self.update_UF) # immediate value updating
         self.ui.nbr_avg.valueChanged.connect(self.update_UF) # immediate value updating
-    
-        # handling of SDR values
-        self.ui.out_sdr_noUF.append("bezuf")
         
+        ## SECTION D
         
+        # handling of SDR value (RSA - Real Speed Achieved) without Utilization Factor
+        self.ui.out_sdr_noUF.append( ac.prepare_RSA_noUF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                                         agg=self.ui.agg.value(), prob=(self.ui.probability.value()/100)) )
+        self.ui.capacity.valueChanged.connect(self.update_RSA_noUF)
+        self.ui.mtu.valueChanged.connect(self.update_RSA_noUF)
+        self.ui.ipheader.currentTextChanged.connect(self.update_RSA_noUF)
+        self.ui.agg.valueChanged.connect(self.update_RSA_noUF)
+        self.ui.probability.valueChanged.connect(self.update_RSA_noUF)
+                              
+        # handling of SDR value (RSA - Real Speed Achieved) with Utilization Factor
+        self.ui.out_sdr_UF.append( ac.prepare_RSA_UF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                                     agg=self.ui.agg.value(), nbr_max=self.ui.nbr_max.value(), nbr_avg=self.ui.nbr_avg.value(),
+                                                     prob=(self.ui.probability.value()/100)) )
+        self.ui.capacity.valueChanged.connect(self.update_RSA_UF)
+        self.ui.mtu.valueChanged.connect(self.update_RSA_UF)
+        self.ui.ipheader.currentTextChanged.connect(self.update_RSA_UF)
+        self.ui.agg.valueChanged.connect(self.update_RSA_UF)
+        self.ui.probability.valueChanged.connect(self.update_RSA_UF)
+        self.ui.nbr_max.valueChanged.connect(self.update_RSA_UF)
+        self.ui.nbr_avg.valueChanged.connect(self.update_RSA_UF) # no impact in output field ("eliminated" in calculation)????
+        
+        # handling of SDR value (RSA - Real Speed Achieved) with natural aggregation impact
+        self.ui.out_sdr_agg.append( ac.prepare_RSA_agg(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                                       agg=self.ui.agg.value()) )
+        self.ui.capacity.valueChanged.connect(self.update_RSA_agg)
+        self.ui.mtu.valueChanged.connect(self.update_RSA_agg)
+        self.ui.ipheader.currentTextChanged.connect(self.update_RSA_agg)
+        self.ui.agg.valueChanged.connect(self.update_RSA_agg)
+        
+        ## SECTION E
+        
+        # handling of average NTP (Net Termination Points) without Utilization Factor
+        self.ui.out_ntp_noUF.append( ac.prepare_NTP_noUF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                                         prob=(self.ui.probability.value()/100), rsa_req=self.ui.sdr_req.value()) )
+        self.ui.capacity.valueChanged.connect(self.update_NTP_noUF)
+        self.ui.mtu.valueChanged.connect(self.update_NTP_noUF)
+        self.ui.ipheader.currentTextChanged.connect(self.update_NTP_noUF)
+        self.ui.probability.valueChanged.connect(self.update_NTP_noUF)
+        self.ui.sdr_req.valueChanged.connect(self.update_NTP_noUF)
+        
+        # handling of average NTP (Net Termination Points) with Utilization Factor
+        self.ui.out_ntp_UF.append( ac.prepare_NTP_UF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                                     nbr_max=self.ui.nbr_max.value(), nbr_avg=self.ui.nbr_avg.value(), 
+                                                     prob=(self.ui.probability.value()/100), rsa_req=self.ui.sdr_req.value()) )
+        self.ui.capacity.valueChanged.connect(self.update_NTP_UF)
+        self.ui.mtu.valueChanged.connect(self.update_NTP_UF)
+        self.ui.ipheader.currentTextChanged.connect(self.update_NTP_UF)
+        self.ui.probability.valueChanged.connect(self.update_NTP_UF)
+        self.ui.sdr_req.valueChanged.connect(self.update_NTP_UF)
+        self.ui.nbr_max.valueChanged.connect(self.update_NTP_UF)
+        self.ui.nbr_avg.valueChanged.connect(self.update_NTP_UF)
+        
+        # handling of decrease of service performance without Utilization Factor
+        self.ui.out_perf_noUF.append( ac.prepare_perf_decrease_noUF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                                                    prob=(self.ui.probability.value()/100), rsa_req=self.ui.sdr_req.value()) )
+        self.ui.capacity.valueChanged.connect(self.update_perf_decrease_noUF)
+        self.ui.mtu.valueChanged.connect(self.update_perf_decrease_noUF)
+        self.ui.ipheader.currentTextChanged.connect(self.update_perf_decrease_noUF)
+        self.ui.probability.valueChanged.connect(self.update_perf_decrease_noUF)
+        self.ui.sdr_req.valueChanged.connect(self.update_perf_decrease_noUF)
+
+        # handling of decrease of service performance without Utilization Factor
+        self.ui.out_perf_UF.append( ac.prepare_perf_decrease_UF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                                                nbr_max=self.ui.nbr_max.value(), nbr_avg=self.ui.nbr_avg.value(), 
+                                                                prob=(self.ui.probability.value()/100), rsa_req=self.ui.sdr_req.value()) )
+        self.ui.capacity.valueChanged.connect(self.update_perf_decrease_UF)
+        self.ui.mtu.valueChanged.connect(self.update_NTP_UF)
+        self.ui.ipheader.currentTextChanged.connect(self.update_NTP_UF)
+        self.ui.probability.valueChanged.connect(self.update_NTP_UF)
+        self.ui.sdr_req.valueChanged.connect(self.update_NTP_UF)
+        self.ui.nbr_max.valueChanged.connect(self.update_NTP_UF)
+        self.ui.nbr_avg.valueChanged.connect(self.update_NTP_UF)
+        
+                
+    def extract_ipheader_value(self):
+        """ Extract number value from ComboBox text item. """
+        item_text = self.ui.ipheader.currentText()
+        item_val = int(item_text.split(sep=" ")[0])
+        
+        return item_val
     
     def update_UF(self):
-        """ Get last input values from GUI, re/calculates result and updates it in the GUI. """
-        nbr_max = self.ui.nbr_max.value()
-        nbr_avg = self.ui.nbr_avg.value()
+        """ Get last input values from GUI fields, re/calculates result and updates it in the output field. """
         # TODO: check if nbr_avg < nbr_max 
-        output_UF = ac.prepare_UF(nbr_max, nbr_avg)
+        output_val = ac.prepare_UF(nbr_max=self.ui.nbr_max.value(), nbr_avg=self.ui.nbr_avg.value())
         
-        self.ui.out_uf.clear() 
-        self.ui.out_uf.append(output_UF) 
+        self.ui.out_uf.clear()
+        self.ui.out_uf.append(output_val)
+    
+    def update_RSA_noUF(self):
+        """ Get last input values from GUI fields, re/calculates result and updates it in the output field. """
+        output_val = ac.prepare_RSA_noUF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                         agg=self.ui.agg.value(), prob=(self.ui.probability.value()/100) )
         
+        self.ui.out_sdr_noUF.clear()
+        self.ui.out_sdr_noUF.append(output_val)
+        
+    def update_RSA_UF(self):
+        """ Get last input values from GUI fields, re/calculates result and updates it in the output field. """
+        output_val = ac.prepare_RSA_UF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                       agg=self.ui.agg.value(), nbr_max=self.ui.nbr_max.value(), nbr_avg=self.ui.nbr_avg.value(),
+                                       prob=(self.ui.probability.value()/100) )
+        
+        self.ui.out_sdr_UF.clear()
+        self.ui.out_sdr_UF.append(output_val)
+        
+    def update_RSA_agg(self):
+        """ Get last input values from GUI fields, re/calculates result and updates it in the output field. """
+        output_val = ac.prepare_RSA_agg(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                       agg=self.ui.agg.value() )
+        
+        self.ui.out_sdr_agg.clear()
+        self.ui.out_sdr_agg.append(output_val)
+        
+    def update_NTP_noUF(self):
+        """ Get last input values from GUI fields, re/calculates result and updates it in the output field. """
+        output_val = ac.prepare_NTP_noUF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                         prob=(self.ui.probability.value()/100), rsa_req=self.ui.sdr_req.value())
+        
+        self.ui.out_ntp_noUF.clear()
+        self.ui.out_ntp_noUF.append(output_val)
+        
+    def update_NTP_UF(self):
+        """ Get last input values from GUI fields, re/calculates result and updates it in the output field. """
+        output_val = ac.prepare_NTP_UF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                       nbr_max=self.ui.nbr_max.value(), nbr_avg=self.ui.nbr_avg.value(), 
+                                       prob=(self.ui.probability.value()/100), rsa_req=self.ui.sdr_req.value())
+        
+        self.ui.out_ntp_UF.clear()
+        self.ui.out_ntp_UF.append(output_val)
+        
+    def update_perf_decrease_noUF(self):
+        """ Get last input values from GUI fields, re/calculates result and updates it in the output field. """
+        output_val = ac.prepare_perf_decrease_noUF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                                   prob=(self.ui.probability.value()/100), rsa_req=self.ui.sdr_req.value())
+        
+        self.ui.out_perf_noUF.clear()
+        self.ui.out_perf_noUF.append(output_val)
+        
+    def update_perf_decrease_UF(self):
+        """ Get last input values from GUI fields, re/calculates result and updates it in the output field. """
+        output_val = ac.prepare_perf_decrease_UF(capacity_L1=self.ui.capacity.value(), mtu=self.ui.mtu.value(), ipheader=self.extract_ipheader_value(), 
+                                                 nbr_max=self.ui.nbr_max.value(), nbr_avg=self.ui.nbr_avg.value(), 
+                                                 prob=(self.ui.probability.value()/100), rsa_req=self.ui.sdr_req.value())
+        
+        self.ui.out_perf_UF.clear()
+        self.ui.out_perf_UF.append(output_val)
+
 
 if __name__ == '__main__':
     # One (and only one) QApplication instance per application.
