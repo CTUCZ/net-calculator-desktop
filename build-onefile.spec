@@ -5,7 +5,8 @@ a = Analysis(
     ['app.py'],
     pathex=[],
     binaries=[],
-    datas=[('logo_ctu_cz.ico', '.')],
+    #datas=[('img/logo_ctu_cz.ico', '.'), ('img/logo_ctu_cz_cb.png', '.')],
+    datas=[('img', 'img')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -34,5 +35,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['logo_ctu_cz.ico'],
+    icon=['img/logo_ctu_cz.ico'],
 )
