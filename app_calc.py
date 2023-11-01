@@ -7,19 +7,45 @@ from scipy.stats import poisson
 
 
 def prepare_float(raw_float, round_decimals):
-    """ Factory function for preparation of value to desired form for presentation in GUI. """
+    """ Factory function for preparation of float value to desired form for presentation in GUI. """
     out_val = round(raw_float, round_decimals)
     
-    #out_val = f"{ out_val: n }" # ValueError: Invalid format specifier
-    #out_val = str( out_val ).format(",n") ) 
-    out_val = str(out_val).replace(".",",") # hardcoded CZ format with comma, locale not working
+    #out_val = f"{out_val:.4n}" # exponential format with comma as decimal separator
+    out_val = f"{out_val:,}".replace(",", "X").replace(".", ",").replace("X", " ") # hardcoded CZ format with comma, locale not working
+    #out_val = str(out_val).replace(".",",") 
     #out_val = str(out_val)
     
     return out_val
 
+def prepare_int(raw_num):
+    """ Factory function for preparation of integer value to desired form for presentation in GUI. """
+    out_val = f"{int(raw_num):,}".replace(",", " ") # thousand separator when integer
+    
+    return out_val
+
 def calculate_LU_max(capacity_L1, nbr_max):
-    """ Calculates Link Utilization in raw form. """
+    """ Calculates Maximal Link Utilization in raw form. """
     return nbr_max / capacity_L1
+
+def prepare_LU_max(capacity_L1, nbr_max): 
+    """ Max LU (Link Utilization) for presentation in GUI. """
+    output_LU = calculate_LU_max(capacity_L1, nbr_max)
+    output_LU = prepare_float(output_LU, 2)
+    
+    return output_LU
+
+
+def calculate_LU_avg(capacity_L1, nbr_avg):
+    """ Calculates Average Link Utilization in raw form. """
+    return nbr_avg / capacity_L1
+
+def prepare_LU_avg(capacity_L1, nbr_avg): 
+    """ Avg LU (Link Utilization) for presentation in GUI. """
+    output_LU = calculate_LU_avg(capacity_L1, nbr_avg)
+    output_LU = prepare_float(output_LU, 2)
+    
+    return output_LU
+
 
 def calculate_UF(nbr_max, nbr_avg):
     """ Calculates Utilization Factor in raw form. """
@@ -28,7 +54,7 @@ def calculate_UF(nbr_max, nbr_avg):
 def prepare_UF(nbr_max, nbr_avg):
     """ Utilizaton factor for presentation in app GUI. """
     output_UF = calculate_UF(nbr_max, nbr_avg)    
-    output_UF = prepare_float(output_UF, 3)
+    output_UF = prepare_float(output_UF, 2)
     
     return output_UF
 
@@ -51,8 +77,8 @@ def aggregation_estimated(capacity_L4, rsa_req):
     return agg_est
 
 
-def calculate_lambda_RSA_noUF(prob, agg): 
-    """ Calculates expected value lambda (mean number of occurences) for further use in RSA without Utilization Factor calculation.
+def calculate_lambda_div(prob, agg): 
+    """ Calculates expected value lambda (mean number of occurences) as num1/num vs. num for further use in other calculations.
     Searching the lambda given probability of occurence and number of events. """
     # The Poisson parameter Lambda (lam) is the total number of events (k) divided by the number of units (n) in the data (lam = k/n).
     # https://stackoverflow.com/questions/69455797/better-way-to-calculate-%CE%BB-in-a-poisson-distribution-if-the-probability-of-occurr
@@ -76,9 +102,9 @@ def calculate_lambda_RSA_noUF(prob, agg):
     return x_lambda
 
 def calculate_RSA_noUF(capacity_L1, mtu, ipheader, agg, prob):
-    """ Calculates RSA (Real Speed Achieved) without impact of Utilization Factor according to the methodics of CTO. """
+    """ Calculates L4 RSA (Real Speed Achieved) without impact of Utilization Factor according to the methodics of CTO. """
     capacity_L4 = calculate_capacity_L4(capacity_L1, mtu, ipheader)
-    lam = calculate_lambda_RSA_noUF(prob, agg)
+    lam = calculate_lambda_div(prob, agg)
     RSA = capacity_L4 * lam / agg
     
     return RSA
@@ -86,7 +112,7 @@ def calculate_RSA_noUF(capacity_L1, mtu, ipheader, agg, prob):
 def prepare_RSA_noUF(capacity_L1, mtu, ipheader, agg, prob): 
     """ RSA (Real Speed Achieved) without Utilization Factor for presentation in GUI. """
     output_RSA = calculate_RSA_noUF(capacity_L1, mtu, ipheader, agg, prob)
-    output_RSA = prepare_float(output_RSA, 3)
+    output_RSA = prepare_float(output_RSA, 1)
     
     return output_RSA
 
@@ -112,7 +138,7 @@ def calculate_lambda_RSA_UF(prob, agg, lu_max):
     return x_lambda
 
 def calculate_RSA_UF(capacity_L1, mtu, ipheader, agg, nbr_max, nbr_avg, prob):
-    """ Calculates RSA (Real Speed Achieved) with impact of Utilization Factor according to the methodics of CTO. """
+    """ Calculates L4 RSA (Real Speed Achieved) with impact of Utilization Factor according to the methodics of CTO. """
     lu_max = calculate_LU_max(capacity_L1, nbr_max)
     capacity_L4 = calculate_capacity_L4(capacity_L1, mtu, ipheader)
     lam = calculate_lambda_RSA_UF(prob, agg, lu_max)
@@ -125,28 +151,60 @@ def calculate_RSA_UF(capacity_L1, mtu, ipheader, agg, nbr_max, nbr_avg, prob):
 def prepare_RSA_UF(capacity_L1, mtu, ipheader, agg, nbr_max, nbr_avg, prob): 
     """ RSA (Real Speed Achieved) with Utilization Factor for presentation in GUI. """
     output_RSA = calculate_RSA_UF(capacity_L1, mtu, ipheader, agg, nbr_max, nbr_avg, prob)
-    output_RSA = prepare_float(output_RSA, 3)
+    output_RSA = prepare_float(output_RSA, 1)
     
     return output_RSA
 
 
-def calculate_RSA_agg(capacity_L1, mtu, ipheader, agg):
-    """ Calculates RSA (Real Speed Achieved) with impact of natural aggregation according to the methodics of CTO. """
-    capacity_L4 = calculate_capacity_L4(capacity_L1, mtu, ipheader)
-    RSA = capacity_L4 / agg
-    
-    return RSA
+# # not used in new version
+# def calculate_BW_noUF(capacity_L1, mtu, ipheader, agg, prob):
+#     """ Calculates L3 BW (BandWidth) without impact of Utilization Factor according to the methodics of CTO. """
+#     rsa = calculate_RSA_noUF(capacity_L1, mtu, ipheader, agg, prob)
+#     BW = (rsa * (mtu - ipheader)) / (mtu - ipheader - 20)
+#    
+#     return BW
 
-def prepare_RSA_agg(capacity_L1, mtu, ipheader, agg):
-    """ RSA (Real Speed Achieved) with impact of natural aggregation for presentation in GUI. """
-    output_RSA = calculate_RSA_agg(capacity_L1, mtu, ipheader, agg)
-    output_RSA = prepare_float(output_RSA, 3)
-    
-    return output_RSA
+# def prepare_BW_noUF(capacity_L1, mtu, ipheader, agg, prob): 
+#     """ BW (BandWidth) without Utilization Factor for presentation in GUI. """
+#     output_BW = calculate_BW_noUF(capacity_L1, mtu, ipheader, agg, prob)
+#     output_BW = prepare_float(output_BW, 1)
+#    
+#     return output_BW
+
+# # not used in new version
+# def calculate_BW_UF(capacity_L1, mtu, ipheader, agg, nbr_max, nbr_avg, prob):
+#     """ Calculates L3 BW (BandWidth) with impact of Utilization Factor according to the methodics of CTO. """
+#     rsa = calculate_RSA_UF(capacity_L1, mtu, ipheader, agg, nbr_max, nbr_avg, prob)
+#     BW = (rsa * (mtu - ipheader)) / (mtu - ipheader - 20)
+#    
+#     return BW
+
+# def prepare_BW_UF(capacity_L1, mtu, ipheader, agg, nbr_max, nbr_avg, prob): 
+#     """ BW (BandWidth) with Utilization Factor for presentation in GUI. """
+#     output_BW = calculate_BW_UF(capacity_L1, mtu, ipheader, agg, nbr_max, nbr_avg, prob)
+#     output_BW = prepare_float(output_BW, 1)
+#    
+#     return output_BW
+
+# # not used in new version
+# def calculate_RSA_agg(capacity_L1, mtu, ipheader, agg):
+#     """ Calculates RSA (Real Speed Achieved) with impact of natural aggregation according to the methodics of CTO. """
+#     capacity_L4 = calculate_capacity_L4(capacity_L1, mtu, ipheader)
+#     RSA = capacity_L4 / agg
+#
+#     return RSA
+
+# # not used in new version
+# def prepare_RSA_agg(capacity_L1, mtu, ipheader, agg):
+#     """ RSA (Real Speed Achieved) with impact of natural aggregation for presentation in GUI. """
+#     output_RSA = calculate_RSA_agg(capacity_L1, mtu, ipheader, agg)
+#     output_RSA = prepare_float(output_RSA, 1)
+#    
+#     return output_RSA
 
 
-def calculate_lambda_NTP(prob, agg): 
-    """ Calculates expected value lambda (mean number of occurences) for further use in NTP with/without Utilization Factor calculation.
+def calculate_lambda_simple(prob, agg): 
+    """ Calculates expected value lambda (mean number of occurences) as number vs. number for further use in other calculations.
     Searching the lambda given probability of occurence and number of events. """
     
     round_decimals = 6
@@ -173,7 +231,7 @@ def calculate_NTP_noUF(capacity_L1, mtu, ipheader, prob, rsa_req):
     """ Calculates NTP (Net Termination Points) without impact of Utilization Factor according to the methodics of CTO. """
     capacity_L4 = calculate_capacity_L4(capacity_L1, mtu, ipheader)
     agg_est = aggregation_estimated(capacity_L4, rsa_req)
-    lam = calculate_lambda_NTP(prob, agg_est)
+    lam = calculate_lambda_simple(prob, agg_est)
     NTP = capacity_L4 * (lam/rsa_req)
     
     return NTP
@@ -181,7 +239,7 @@ def calculate_NTP_noUF(capacity_L1, mtu, ipheader, prob, rsa_req):
 def prepare_NTP_noUF(capacity_L1, mtu, ipheader, prob, rsa_req):
     """ NTP (Net Termination Points) without Utilization Factor for presentation in GUI. """
     output_NTP = calculate_NTP_noUF(capacity_L1, mtu, ipheader, prob, rsa_req)
-    output_NTP = str(int(output_NTP))
+    output_NTP = prepare_int(output_NTP)
     
     return output_NTP
 
@@ -190,7 +248,7 @@ def calculate_NTP_UF(capacity_L1, mtu, ipheader, nbr_max, nbr_avg, prob, rsa_req
     """ Calculates NTP (Net Termination Points) with impact of Utilization Factor according to the methodics of CTO. """
     capacity_L4 = calculate_capacity_L4(capacity_L1, mtu, ipheader)
     agg_est = aggregation_estimated(capacity_L4, rsa_req)
-    lam = calculate_lambda_NTP(prob, agg_est)
+    lam = calculate_lambda_simple(prob, agg_est)
     nbr_avg_L4 = calculate_NBR_avg_L4(mtu, ipheader, nbr_avg)
     uf = calculate_UF(nbr_max, nbr_avg)
     NTP = (uf * capacity_L4**2 * lam) / (rsa_req * nbr_avg_L4)
@@ -200,7 +258,7 @@ def calculate_NTP_UF(capacity_L1, mtu, ipheader, nbr_max, nbr_avg, prob, rsa_req
 def prepare_NTP_UF(capacity_L1, mtu, ipheader, nbr_max, nbr_avg, prob, rsa_req):
     """ NTP (Net Termination Points) with Utilization Factor for presentation in GUI. """
     output_NTP = calculate_NTP_UF(capacity_L1, mtu, ipheader, nbr_max, nbr_avg, prob, rsa_req)
-    output_NTP = str(int(output_NTP))
+    output_NTP = prepare_int(output_NTP)
     
     return output_NTP
 
@@ -209,7 +267,7 @@ def calculate_perf_decrease_noUF(capacity_L1, mtu, ipheader, prob, rsa_req):
     """ Calculates service performance decrease without impact of Utilization Factor according to the methodics of CTO. """
     capacity_L4 = calculate_capacity_L4(capacity_L1, mtu, ipheader)
     agg_est = aggregation_estimated(capacity_L4, rsa_req)
-    lam = calculate_lambda_NTP(prob, agg_est)
+    lam = calculate_lambda_simple(prob, agg_est)
     rsa_max = capacity_L4 / lam
     rsa_sigma = rsa_max - rsa_req
     perf_decrease = (rsa_sigma / rsa_max) * 100 
@@ -219,7 +277,7 @@ def calculate_perf_decrease_noUF(capacity_L1, mtu, ipheader, prob, rsa_req):
 def prepare_perf_decrease_noUF(capacity_L1, mtu, ipheader, prob, rsa_req):
     """ Service performance decrease without Utilization Factor for presentation in GUI. """
     output_perf = calculate_perf_decrease_noUF(capacity_L1, mtu, ipheader, prob, rsa_req)
-    output_perf = prepare_float(output_perf, 3)
+    output_perf = prepare_float(output_perf, 1)
     
     return output_perf
 
@@ -230,7 +288,7 @@ def calculate_perf_decrease_UF(capacity_L1, mtu, ipheader, nbr_max, nbr_avg, pro
     nbr_avg_L4 = calculate_NBR_avg_L4(mtu, ipheader, nbr_avg)
     uf = calculate_UF(nbr_max, nbr_avg)
     ntp_est = int( (uf * capacity_L4**2)/(rsa_req * nbr_avg_L4) )
-    lam = calculate_lambda_NTP(prob, ntp_est)
+    lam = calculate_lambda_simple(prob, ntp_est)
     rsa_max = (uf * capacity_L4**2) / (lam * nbr_avg_L4)
     rsa_sigma = rsa_max - rsa_req
     perf_decrease = (rsa_sigma / rsa_max) * 100 
@@ -240,25 +298,38 @@ def calculate_perf_decrease_UF(capacity_L1, mtu, ipheader, nbr_max, nbr_avg, pro
 def prepare_perf_decrease_UF(capacity_L1, mtu, ipheader, nbr_max, nbr_avg, prob, rsa_req):
     """ Service performance decrease without Utilization Factor for presentation in GUI. """
     output_perf = calculate_perf_decrease_UF(capacity_L1, mtu, ipheader, nbr_max, nbr_avg, prob, rsa_req)
-    output_perf = prepare_float(output_perf, 3)
+    output_perf = prepare_float(output_perf, 1)
     
     return output_perf
 
-"""
-agg = 256
-prob = 0.9
-capacity_L1 = 2488
-mtu = 1500
-ipheader = 20
-nbr_max = 1000
-nbr_avg = 500
-sdr_req = 100
+
+def calculate_BW_min(mtu, ipheader, agg, prob, rsa_req):
+    """ Calculates L3 minimal bandwidth of bottleneck according to the methodics of CTO. """
+    lam = calculate_lambda_div(prob, agg)
+    BW = ( (rsa_req * (agg / lam)) * (mtu - ipheader) ) / (mtu - ipheader - 8)
+    
+    return BW
+
+def prepare_BW_min(mtu, ipheader, agg, prob, rsa_req):
+    """ L3 minimal bandwidth for presentation in GUI. """
+    output_BW = calculate_BW_min(mtu, ipheader, agg, prob, rsa_req)
+    output_BW = prepare_float(output_BW, 1)
+    
+    return output_BW
 
 
-calculate_lambda_NTP(prob, agg)
+def calculate_capacity_min(mtu, ipheader, agg, nbr_max, nbr_avg, prob, rsa_req):
+    """ Calculates L3 minimal capacity of bottleneck according to the methodics of CTO. """
+    uf = calculate_UF(nbr_max, nbr_avg)
+    lam = calculate_lambda_div(prob, agg)
+    capacity_L3 = ( ( ( (rsa_req * agg * nbr_avg) / (uf * lam) )**0.5 ) * (mtu - ipheader) ) / (mtu - ipheader - 8)
+    
+    return capacity_L3
 
-lu_max = calculate_LU_max(capacity_L1, nbr_max)
-calculate_lambda_RSA_UF(prob, agg, lu_max)
+def prepare_capacity_min(mtu, ipheader, agg, nbr_max, nbr_avg, prob, rsa_req):
+    """ L3 minimal capacity for presentation in GUI. """
+    output_cap = calculate_capacity_min(mtu, ipheader, agg, nbr_max, nbr_avg, prob, rsa_req)
+    output_cap = prepare_float(output_cap, 1)
+    
+    return output_cap
 
-calculate_lambda_RSA_noUF(prob, agg)
-"""

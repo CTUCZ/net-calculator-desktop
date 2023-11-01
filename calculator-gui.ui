@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>735</width>
-    <height>855</height>
+    <height>980</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,11 +19,11 @@
   <property name="maximumSize">
    <size>
     <width>735</width>
-    <height>855</height>
+    <height>980</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>ČTÚ Kalkulačka dopadu kapacity sítě</string>
+   <string>Kalkulačka pro výpočet dopadu kapacity sítě elektronických komunikací</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QGroupBox {font-weight: bold;}</string>
@@ -41,10 +41,102 @@
          <x>0</x>
          <y>0</y>
          <width>715</width>
-         <height>835</height>
+         <height>960</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QFrame" name="box_intro">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>70</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QLabel" name="intro_text_company">
+           <property name="geometry">
+            <rect>
+             <x>140</x>
+             <y>-4</y>
+             <width>411</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:696;&quot;&gt;Český telekomunikační úřad&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="logo">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>0</y>
+             <width>60</width>
+             <height>60</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true"/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="help">
+           <property name="geometry">
+            <rect>
+             <x>614</x>
+             <y>50</y>
+             <width>55</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Nápověda</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="intro_text">
+           <property name="geometry">
+            <rect>
+             <x>140</x>
+             <y>14</y>
+             <width>411</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Metodika pro vyhodnocování dopadu kapacity sítí elektronických komunikací na výkon služeb přístupu k internetu, verze 1.0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </widget>
+        </item>
         <item>
          <widget class="QFrame" name="frame_fixed">
           <property name="sizePolicy">
@@ -56,13 +148,13 @@
           <property name="minimumSize">
            <size>
             <width>680</width>
-            <height>800</height>
+            <height>845</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>680</width>
-            <height>800</height>
+            <height>845</height>
            </size>
           </property>
           <property name="frameShape">
@@ -99,7 +191,7 @@
             </size>
            </property>
            <property name="title">
-            <string>B. Výsledky monitoringu síťového provozu (měsíc) - nepovinné</string>
+            <string>B. Výsledky monitoringu síťového provozu (měsíc)</string>
            </property>
            <widget class="QLabel" name="nbr_max_l">
             <property name="geometry">
@@ -128,6 +220,9 @@
               <width>0</width>
               <height>0</height>
              </size>
+            </property>
+            <property name="showGroupSeparator" stdset="0">
+             <bool>true</bool>
             </property>
             <property name="decimals">
              <number>1</number>
@@ -184,17 +279,17 @@
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;B.2 Průměrná bitová rychlost NBR&lt;span style=&quot; vertical-align:sub;&quot;&gt;avg&lt;/span&gt; (L1)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="out_uf_l">
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>130</y>
+              <y>126</y>
               <width>221</width>
               <height>16</height>
              </rect>
             </property>
             <property name="text">
-             <string>B.3 UF (Utilization Factor - faktor využití)</string>
+             <string>B.3 Faktor využití UF</string>
             </property>
            </widget>
            <widget class="QDoubleSpinBox" name="nbr_max">
@@ -211,6 +306,9 @@
               <width>0</width>
               <height>0</height>
              </size>
+            </property>
+            <property name="showGroupSeparator" stdset="0">
+             <bool>true</bool>
             </property>
             <property name="decimals">
              <number>1</number>
@@ -232,9 +330,9 @@
             <property name="geometry">
              <rect>
               <x>320</x>
-              <y>120</y>
+              <y>121</y>
               <width>91</width>
-              <height>31</height>
+              <height>26</height>
              </rect>
             </property>
            </widget>
@@ -248,10 +346,13 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nepovinné: Maximální hodnota bitové rychlosti z monitoringu síťového provozu (v časovém intervalu za poslední měsíc) v místě identifikovaného úzkého hrdla síťové infrastruktury.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;VSTUP 5:&lt;/span&gt; Maximální hodnota bitové rychlosti z monitoringu síťového provozu (v časovém intervalu za poslední měsíc) v místě identifikovaného úzkého hrdla síťové infrastruktury. K této hodnotě lze stanovit hodnotu parametru využití LU&lt;span style=&quot; vertical-align:sub;&quot;&gt;max&lt;/span&gt; (link utilization), která odpovídá podílu maximální bitové rychlosti (políčko B.1) a kapacity úzkého hrdla (políčko A.1).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">1</string>
             </property>
            </widget>
            <widget class="QPushButton" name="B_help">
@@ -264,10 +365,13 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nepovinné: V případě, že se jedná o síťovou infrastrukturu, kde není žádný koncový bod (NTP) aktivní (nejsou aktivní přípojky) nebo o plánování výstavby/projektovou činnost, je zřejmé, že nelze posuzovat výsledky monitoringu síťového provozu (nulové hodnoty). Lze pouze posuzovat výkonnost síťové infrastruktury jako celku, resp. její schopnosti zajistit požadovanou kapacitu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Část B&lt;/span&gt; kalkulačky zahrnuje nepovinné vstupní parametry. V případě, že se jedná o síťovou infrastrukturu, kde není žádná přípojka aktivní, tedy koncový bod sítě (NTP) nebo se jedná o plánování výstavby/projektovou činnost, je zřejmé, že nelze posuzovat výsledky monitoringu síťového provozu (nulové hodnoty). Lze pouze posuzovat výkonnost síťové infrastruktury jako celku, resp. její schopnosti zajistit požadovanou kapacitu v čase.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">B</string>
             </property>
            </widget>
            <widget class="QPushButton" name="B2_help">
@@ -280,10 +384,13 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nepovinné: Průměrná hodnota bitové rychlosti z monitoringu síťového provozu (v časovém intervalu za poslední měsíc) v místě identifikovaného úzkého hrdla síťové infrastruktury.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;VSTUP 6:&lt;/span&gt; Průměrná hodnota bitové rychlosti z monitoringu síťového provozu (v časovém intervalu za poslední měsíc) v místě identifikovaného úzkého hrdla síťové infrastruktury.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">2</string>
             </property>
            </widget>
            <widget class="QPushButton" name="B3_help">
@@ -296,10 +403,59 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vyjadřuje chování koncových uživatelů v posuzované lokalitě.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;VSTUP 7:&lt;/span&gt; Vypočítaná hodnota faktoru využití UF (utilization factor), která vyjadřuje chování koncových uživatelů v posuzovaném úzkém hrdle (lokalitě). &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">3</string>
+            </property>
+           </widget>
+           <widget class="QTextBrowser" name="out_lu_max">
+            <property name="geometry">
+             <rect>
+              <x>530</x>
+              <y>36</y>
+              <width>50</width>
+              <height>26</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QLabel" name="out_lu_max_l">
+            <property name="geometry">
+             <rect>
+              <x>490</x>
+              <y>40</y>
+              <width>41</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;LU&lt;span style=&quot; vertical-align:sub;&quot;&gt;max&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="out_lu_avg_l">
+            <property name="geometry">
+             <rect>
+              <x>490</x>
+              <y>80</y>
+              <width>41</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;LU&lt;span style=&quot; vertical-align:sub;&quot;&gt;avg&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+           <widget class="QTextBrowser" name="out_lu_avg">
+            <property name="geometry">
+             <rect>
+              <x>530</x>
+              <y>77</y>
+              <width>50</width>
+              <height>26</height>
+             </rect>
             </property>
            </widget>
           </widget>
@@ -368,6 +524,9 @@
               <height>22</height>
              </rect>
             </property>
+            <property name="showGroupSeparator" stdset="0">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <number>1</number>
             </property>
@@ -390,11 +549,14 @@
               <height>22</height>
              </rect>
             </property>
+            <property name="showGroupSeparator" stdset="0">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
-             <number>1</number>
+             <number>46</number>
             </property>
             <property name="maximum">
-             <number>99999</number>
+             <number>1514</number>
             </property>
             <property name="value">
              <number>1500</number>
@@ -506,6 +668,9 @@
             <property name="locale">
              <locale language="Czech" country="CzechRepublic"/>
             </property>
+            <property name="showGroupSeparator" stdset="0">
+             <bool>true</bool>
+            </property>
             <property name="decimals">
              <number>1</number>
             </property>
@@ -545,10 +710,13 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Identifikujte kapacitu úzkého hrdla distribuční (přípojné) sítě (tzv. bottleneck).&lt;/p&gt;&lt;p&gt;Příklad: Optická přístupová technologie GPON s dělícím poměrem pasivní infrastruktury 1:256 (kategorie C). Konektivita centrální jednotky OLT je zajištěna pomocí SFP+ s kapacitou 10 Gb/s (IEEE 802.3ae). Úzké hrdlo bude v tomto případě samotné SFP technologie GPON (ITU-T G.984), které ve směru downstream umožňuje maximální rychlost 2488 Mb/s. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;VSTUP 1:&lt;/span&gt; Identifikujte úzké hrdlo distribuční (přípojné) sítě elektronických komunikací (bottleneck), kapacitu identifikovaného úzkého hrdla v Mb/s (L1) zapište do příslušného políčka A.1. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Příklad: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Optická přístupová technologie GPON s dělícím poměrem pasivní infrastruktury 1:256 (kategorie C). Konektivita centrální jednotky OLT je zajištěna pomocí SFP+ s kapacitou 10 Gb/s (IEEE 802.3ae). Úzké hrdlo bude v tomto případě samotná SFP technologie GPON (ITU-T G.984), která ve směru downstream umožňuje maximální rychlost 2488 Mb/s (L1).&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">1</string>
             </property>
            </widget>
            <widget class="QPushButton" name="A_help">
@@ -561,10 +729,13 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Povinné: Vstupní parametry sítě elektronických komunikací odpovídají vždy identifikovanému úzkému hrdlu síťové infrastruktury od přípojné sítě (backhaul) po koncový bod sítě (NTP; BEREC BoR (20) 46).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Část A&lt;/span&gt; kalkulačky zahrnuje povinné vstupní parametry posuzované sítě elektronických komunikací, které odpovídají vždy identifikovanému úzkému hrdlu síťové infrastruktury od přípojné sítě (backhaul) až po konkrétní přípojnou síť (přípojku), tedy po koncový bod sítě (NTP; BEREC BoR (20) 46).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">A</string>
             </property>
            </widget>
            <widget class="QPushButton" name="A2_help">
@@ -577,10 +748,13 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Uveďte hodnotu &lt;span style=&quot; font-style:italic;&quot;&gt;MTU&lt;/span&gt; používanou v rámci posuzované distribuční (přípojné) sítě s ohledem na koncový bod sítě (NTP), nikoliv s ohledem na posuzované úzké hrdlo.&lt;/p&gt;&lt;p&gt;Příklad: Standardní hodnotou &lt;span style=&quot; font-style:italic;&quot;&gt;MTU&lt;/span&gt; je 1500 B, nicméně v případě, že je v rámci síťové infrastruktury využíváno protokolu PPPoE, bude &lt;span style=&quot; font-style:italic;&quot;&gt;MTU&lt;/span&gt; v místě koncového bodu sítě odpovídat hodnotě 1492 B.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;VSTUP 2:&lt;/span&gt; Uveďte hodnotu MTU používanou v rámci posuzované distribuční (přípojné) sítě s ohledem na koncový bod sítě (NTP), nikoliv s ohledem na posuzované úzké hrdlo.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Příklad: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Standardní hodnotou MTU je 1500 B pro uživatelské rozhraní koncového bodu sítě (NTP), nicméně v případě, kdy je v rámci síťové infrastruktury využíváno protokolu PPPoE, bude MTU v místě NTP odpovídat hodnotě 1492 B.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">2</string>
             </property>
            </widget>
            <widget class="QPushButton" name="A3_help">
@@ -593,10 +767,13 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Uveďte, jakým protokolem síťové vrstvy je (bude) služba přístupu k internetu poskytována. V případě IPv4 bude velikost IP záhlaví odpovídat nejčastěji hodnotě 20 B, v případě IPv6 hodnotě 40 B.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;VSTUP 3:&lt;/span&gt; Uveďte, jakým protokolem síťové vrstvy je (bude) služba přístupu k internetu poskytována, buď IPv4, potom bude velikost IP záhlaví odpovídat nejčastěji hodnotě 20 B, nebo IPv6, potom bude velikost IP záhlaví odpovídat nejčastěji hodnotě 40 B. V případě záhlaví transportní vrstvy je předpokládaná velikost 20 B pro TCP protokol (SDR) a 8 B pro UDP protokol (šířka pásma). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Příklad: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Služba přístupu k síti internet bude poskytována prostřednictvím protokolu IPv4, velikost záhlaví bude tedy 20 B.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">3</string>
             </property>
            </widget>
            <widget class="QPushButton" name="A4_help">
@@ -609,10 +786,13 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Uveďte počet koncových bodů sítě (&lt;span style=&quot; font-style:italic;&quot;&gt;NTP&lt;/span&gt;), na které má dopad posuzovaná hodnota kapacity úzkého hrdla.&lt;/p&gt;&lt;p&gt;Příklad: Identifikované úzké hrdlo v podobě distribuční sítě zajišťuje kapacitu pro 3 lokality s GPON přístupovou technologií, kde ke každé centrální OLT jednotce je připojitelných (je připojeno) 256 koncových zřízení ONT. Celkový počet koncových bodů sítě &lt;span style=&quot; font-style:italic;&quot;&gt;NTP&lt;/span&gt; = 3 x 256 = 768.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;VSTUP 4:&lt;/span&gt; Uveďte počet koncových bodů sítě (NTP), na které má dopad posuzovaná hodnota kapacity (šířky pásma) úzkého hrdla. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Příklad:&lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Identifikované úzké hrdlo v podobě distribuční sítě zajišťuje kapacitu pro 3 lokality GPON přístupovou technologií s identickou centrální jednotkou OLT (stejným GPON portem), přičemž je současně disponibilních/je aktivováno 256 přípojek, tedy 256 koncových bodů sítě (NTP). &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">4</string>
             </property>
            </widget>
           </widget>
@@ -646,31 +826,6 @@
            <property name="title">
             <string>C. Vstupní parametr Poissonova procesu</string>
            </property>
-           <widget class="QSpinBox" name="probability">
-            <property name="geometry">
-             <rect>
-              <x>320</x>
-              <y>40</y>
-              <width>61</width>
-              <height>22</height>
-             </rect>
-            </property>
-            <property name="sizeIncrement">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>99</number>
-            </property>
-            <property name="value">
-             <number>90</number>
-            </property>
-           </widget>
            <widget class="QLabel" name="probability_l">
             <property name="geometry">
              <rect>
@@ -687,7 +842,7 @@
            <widget class="QLabel" name="probability_l_u">
             <property name="geometry">
              <rect>
-              <x>390</x>
+              <x>470</x>
               <y>40</y>
               <width>21</width>
               <height>21</height>
@@ -695,22 +850,6 @@
             </property>
             <property name="text">
              <string>%</string>
-            </property>
-           </widget>
-           <widget class="QPushButton" name="C1_help">
-            <property name="geometry">
-             <rect>
-              <x>620</x>
-              <y>40</y>
-              <width>41</width>
-              <height>24</height>
-             </rect>
-            </property>
-            <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hodnota pravděpodobnosti by neměla být menší než 90%, kdy právě hodnota 90% se doporučuje pro pevné sítě a bezdrátové sítě ve venkovských oblastech, zatímco hodnota 95% se doporučuje pro bezdrátové sítě v městských oblastech.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="text">
-             <string notr="true">?</string>
             </property>
            </widget>
            <widget class="QPushButton" name="C_help">
@@ -723,11 +862,34 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jediným vstupním parametrem Poissonova procesu je pravděpodobnost, která má souvislost s počtem koncových bodů sítě (&lt;span style=&quot; font-style:italic;&quot;&gt;NTP&lt;/span&gt;), které v čase &lt;span style=&quot; font-style:italic;&quot;&gt;t&lt;/span&gt; generují současně datové toky do systému s hromadnou obsluhou. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Část C&lt;/span&gt; kalkulačky zahrnuje povinný vstupní parametr pro samotný Poissonův proces, respektive pravděpodobnost, která má úzkou souvislost s počtem koncových bodů sítě (NTP) generujících v čase t současně datové toky do systému s hromadnou obsluhou (posuzované úzké hrdlo). Pro venkovské oblasti (rural areas) se doporučuje 90 % pravděpodobnost, pro městské části 95% (urban areas).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">C</string>
             </property>
+           </widget>
+           <widget class="QComboBox" name="probability">
+            <property name="geometry">
+             <rect>
+              <x>320</x>
+              <y>40</y>
+              <width>141</width>
+              <height>22</height>
+             </rect>
+            </property>
+            <item>
+             <property name="text">
+              <string>90 (venkovské oblasti)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>95 (městské oblasti)</string>
+             </property>
+            </item>
            </widget>
           </widget>
           <widget class="QGroupBox" name="section_D">
@@ -736,7 +898,7 @@
              <x>0</x>
              <y>480</y>
              <width>680</width>
-             <height>130</height>
+             <height>80</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -748,19 +910,19 @@
            <property name="minimumSize">
             <size>
              <width>680</width>
-             <height>130</height>
+             <height>80</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>680</width>
-             <height>130</height>
+             <height>80</height>
             </size>
            </property>
            <property name="title">
-            <string>D. Dopad agregace na rychlost</string>
+            <string>D. Dopad agregace na přípojku</string>
            </property>
-           <widget class="QLabel" name="sdr_l">
+           <widget class="QLabel" name="out_sdr_l">
             <property name="geometry">
              <rect>
               <x>20</x>
@@ -770,16 +932,16 @@
              </rect>
             </property>
             <property name="text">
-             <string>D.1 Výsledná SDR</string>
+             <string>D.1 Výsledná SDR (L4)</string>
             </property>
            </widget>
            <widget class="QTextBrowser" name="out_sdr_noUF">
             <property name="geometry">
              <rect>
               <x>220</x>
-              <y>30</y>
+              <y>36</y>
               <width>91</width>
-              <height>31</height>
+              <height>26</height>
              </rect>
             </property>
            </widget>
@@ -787,32 +949,9 @@
             <property name="geometry">
              <rect>
               <x>430</x>
-              <y>30</y>
+              <y>35</y>
               <width>91</width>
-              <height>31</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="sdr_agg_l">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>90</y>
-              <width>201</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>D.2 SDR (přirozená agregace)</string>
-            </property>
-           </widget>
-           <widget class="QTextBrowser" name="out_sdr_agg">
-            <property name="geometry">
-             <rect>
-              <x>220</x>
-              <y>80</y>
-              <width>91</width>
-              <height>31</height>
+              <height>26</height>
              </rect>
             </property>
            </widget>
@@ -842,19 +981,6 @@
              <string>Mb/s (s UF)</string>
             </property>
            </widget>
-           <widget class="QLabel" name="out_sdr_agg_u">
-            <property name="geometry">
-             <rect>
-              <x>320</x>
-              <y>90</y>
-              <width>41</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Mb/s</string>
-            </property>
-           </widget>
            <widget class="QPushButton" name="D_help">
             <property name="geometry">
              <rect>
@@ -865,26 +991,13 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Výsledek dopadu agregace na základě Poissonova procesu, a to s ohledem na identifikovanou kapacitu úzkého hrdla (bottleneck) a průměrný počet koncových bodů sítě (&lt;span style=&quot; font-style:italic;&quot;&gt;NTP&lt;/span&gt;).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Část D&lt;/span&gt; kalkulačky představuje výsledek dopadu agregace na základě Poissonova procesu, a to s ohledem na identifikovanou kapacitu úzkého hrdla (bottleneck) a průměrný počet disponibilních/aktivních přípojek, tedy koncových bodů sítě (NTP).&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Výstup 1:&lt;/span&gt; Výsledná hodnota průměrné SDR (bez UF) popisuje výkonost posuzované infrastruktury v místě disponibilní přípojky, tedy koncového bodu sítě (NTP), za předpokladu plného využití šířky pásma sítě (položka A.1) identifikovaného úzkého hrdla, zatímco výsledná hodnota průměrné SDR (s UF) popisuje aktuální výkonost síťové infrastruktury v místě NTP s ohledem na dostupnou kapacitu sítě (položka A.1) a chování koncových uživatelů dle monitoringu síťového provozu (položka B.3). Oba výsledky odpovídají rychlosti na transportní vrstvě (L 4), tedy TCP propustnosti.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
-            </property>
-           </widget>
-           <widget class="QPushButton" name="D123_help">
-            <property name="geometry">
-             <rect>
-              <x>620</x>
-              <y>35</y>
-              <width>41</width>
-              <height>24</height>
-             </rect>
-            </property>
-            <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Skutečně dosahovaná rychlost: Výsledná hodnota průměrné &lt;span style=&quot; font-style:italic;&quot;&gt;SDR&lt;/span&gt; (bez UF) popisuje výkonnost posuzované infrastruktury v místě NTP za předpokladu plného vytížení identifikované kapacity sítě (A.1), zatímco výsledná hodnota průměrné SDR (s UF) popisuje aktuální výkonnost síťové infrastruktury v místě NTP s ohledem na dostupnou kapacitu sítě (A.1) a chování koncových uživatelů dle monitoringu síťového provozu (B.3). Kalkulačka ukazuje také dopad přirozené agregace.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">D</string>
             </property>
            </widget>
           </widget>
@@ -892,9 +1005,9 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>620</y>
+             <y>570</y>
              <width>680</width>
-             <height>180</height>
+             <height>275</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -906,38 +1019,38 @@
            <property name="minimumSize">
             <size>
              <width>680</width>
-             <height>180</height>
+             <height>275</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>680</width>
-             <height>180</height>
+             <height>275</height>
             </size>
            </property>
            <property name="title">
-            <string>E. Výpočet průměrného počtu NTP</string>
+            <string>E. Dopad agregace na úzké hrdlo sítě elektronických komunikací</string>
            </property>
            <widget class="QLabel" name="out_perf_l">
             <property name="geometry">
              <rect>
               <x>20</x>
               <y>140</y>
-              <width>151</width>
+              <width>201</width>
               <height>21</height>
              </rect>
             </property>
             <property name="text">
-             <string>E.3 Pokles výkonu služby</string>
+             <string>E.3 Pokles výkonu služby na přípojce</string>
             </property>
            </widget>
            <widget class="QTextBrowser" name="out_perf_noUF">
             <property name="geometry">
              <rect>
               <x>220</x>
-              <y>130</y>
+              <y>137</y>
               <width>91</width>
-              <height>31</height>
+              <height>26</height>
              </rect>
             </property>
            </widget>
@@ -945,9 +1058,9 @@
             <property name="geometry">
              <rect>
               <x>430</x>
-              <y>130</y>
+              <y>137</y>
               <width>91</width>
-              <height>31</height>
+              <height>26</height>
              </rect>
             </property>
            </widget>
@@ -956,12 +1069,12 @@
              <rect>
               <x>20</x>
               <y>40</y>
-              <width>151</width>
+              <width>181</width>
               <height>21</height>
              </rect>
             </property>
             <property name="text">
-             <string>E.1 Požadovaná SDR - L4</string>
+             <string>E.1 Požadovaná SDR (L4) přípojky</string>
             </property>
            </widget>
            <widget class="QLabel" name="out_perf_noUF_u">
@@ -1007,9 +1120,9 @@
             <property name="geometry">
              <rect>
               <x>220</x>
-              <y>80</y>
+              <y>87</y>
               <width>91</width>
-              <height>31</height>
+              <height>26</height>
              </rect>
             </property>
            </widget>
@@ -1044,21 +1157,21 @@
              <rect>
               <x>20</x>
               <y>90</y>
-              <width>151</width>
+              <width>191</width>
               <height>21</height>
              </rect>
             </property>
             <property name="text">
-             <string>E.2 Průměrný počet NTP</string>
+             <string>E.2 Průměrný počet přípojek (NTP)</string>
             </property>
            </widget>
            <widget class="QTextBrowser" name="out_ntp_UF">
             <property name="geometry">
              <rect>
               <x>430</x>
-              <y>80</y>
+              <y>87</y>
               <width>91</width>
-              <height>31</height>
+              <height>26</height>
              </rect>
             </property>
            </widget>
@@ -1072,26 +1185,32 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Výsledek dopadu agregace na základě Poissonova procesu s ohledem na identifikovanou kapacitu úzkého hrdla (A.1) a požadované zohlednění hodnoty průměrné skutečně dosahované rychlosti (&lt;span style=&quot; font-style:italic;&quot;&gt;SDR&lt;/span&gt;).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Část E&lt;/span&gt; kalkulačky zahrnuje nepovinné vstupní parametry, které ovšem umožňují provést analýzu dopadu požadované hodnoty rychlosti SDR v místě disponibilní/aktivní přípojky, tedy místě koncového bodu sítě (NTP), na vlastnosti identifikovaného úzkého hrdla síťové infrastruktury.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">E</string>
             </property>
            </widget>
            <widget class="QPushButton" name="E1_help">
             <property name="geometry">
              <rect>
               <x>620</x>
-              <y>39</y>
+              <y>40</y>
               <width>41</width>
               <height>24</height>
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nepovinné: Požadované zohlednění hodnoty průměrné &lt;span style=&quot; font-style:italic;&quot;&gt;SDR&lt;/span&gt;, která má být s ohledem na identifikovanou kapacitu sítě (A.1) posuzována v rámci Poissonova procesu dopadu agregace.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;VSTUP 8:&lt;/span&gt; Vstupní hodnota průměrné SDR, která má být zohledněna s ohledem na vlastnosti identifikovaného úzkého hrdla síťové infrastruktury v rámci Poissonova procesu pro potřeby analýzy dopadu agregace. V případě, že posuzované přípojky vykazují různou hodnotu běžně dostupné rychlosti (efektivní rychlosti), doporučuje se použít váženého průměru.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">1</string>
             </property>
            </widget>
            <widget class="QDoubleSpinBox" name="sdr_req">
@@ -1108,6 +1227,9 @@
               <width>0</width>
               <height>0</height>
              </size>
+            </property>
+            <property name="showGroupSeparator" stdset="0">
+             <bool>true</bool>
             </property>
             <property name="decimals">
              <number>1</number>
@@ -1129,16 +1251,19 @@
             <property name="geometry">
              <rect>
               <x>620</x>
-              <y>89</y>
+              <y>83</y>
               <width>41</width>
               <height>24</height>
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Průměrný počet koncových bodů sítě (&lt;span style=&quot; font-style:italic;&quot;&gt;NTP&lt;/span&gt;): Výsledná hodnota průměrného počtu &lt;span style=&quot; font-style:italic;&quot;&gt;NTP&lt;/span&gt; (bez UF) charakterizuje možné pokrytí NTP posuzovanou infrastrukturou s ohledem na požadovanou hodnotu &lt;span style=&quot; font-style:italic;&quot;&gt;SDR&lt;/span&gt; (E.1) a identifikovanou kapacitu sítě (A.1) se současným předpokladem jejího plného vytížení, zatímco výsledná hodnota průměrného počtu &lt;span style=&quot; font-style:italic;&quot;&gt;NTP&lt;/span&gt; (s UF) charakterizuje aktuální možnost pokrytí NTP s ohledem na dostupnou kapacitu sítě (A.1) a typické chování koncových uživatelů dle monitoringu síťového provozu (B.3) v dané lokalitě.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Výstup 2:&lt;/span&gt; Průměrný počet koncových bodů sítě (NTP) bez UF charakterizuje možné pokrytí disponibilních přípojek posuzovanou infrastrukturou s ohledem na požadovanou hodnotu SDR (položka E.1) a identifikovanou kapacitu sítě v místě úzkého hrdla síťové infrastruktury (A.1) se současným předpokladem jejího plného vytížení, zatímco výsledná hodnota průměrného počtu koncových bodů sítě (NTP) s UF charakterizuje aktuální možnost pokrytí aktivních přípojek s ohledem na dostupnou kapacitu sítě (položka A.1) a typické chování koncových uživatelů dle monitoringu síťového provozu (položka B.3) v dané lokalitě.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">2</string>
             </property>
            </widget>
            <widget class="QPushButton" name="E3_help">
@@ -1151,10 +1276,123 @@
              </rect>
             </property>
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokles výkonu služeb (&lt;span style=&quot; font-style:italic;&quot;&gt;P&lt;/span&gt;&lt;span style=&quot; font-style:italic; vertical-align:sub;&quot;&gt;SDR&lt;/span&gt;): Výsledná průměrná hodnota &lt;span style=&quot; font-style:italic;&quot;&gt;P&lt;/span&gt;&lt;span style=&quot; font-style:italic; vertical-align:sub;&quot;&gt;SDR&lt;/span&gt; (bez UF) popisuje dopad výkonosti posuzované infrastruktury v místě NTP za předpokladu plného vytížení kapacity sítě (A.1) pro požadovanou průměrnou hodnotou &lt;span style=&quot; font-style:italic;&quot;&gt;SDR&lt;/span&gt; (E.1), zatímco výsledná průměrná hodnota &lt;span style=&quot; font-style:italic;&quot;&gt;P&lt;/span&gt;&lt;span style=&quot; font-style:italic; vertical-align:sub;&quot;&gt;SDR&lt;/span&gt; (s UF) popisuje aktuální dopad na výkonost síťové infrastruktury v místě NTP s ohledem na dostupnou kapacitu sítě (A.1) a chování koncových uživatelů (B.3) dle monitoringu síťového provozu pro požadovanou průměrnou hodnotou &lt;span style=&quot; font-style:italic;&quot;&gt;SDR&lt;/span&gt; (E.1).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Výstup 3:&lt;/span&gt; Výsledná průměrná hodnota P&lt;span style=&quot; vertical-align:sub;&quot;&gt;SDR&lt;/span&gt; (bez UF) popisuje dopad výkonosti posuzované infrastruktury v místě NTP (disponibilních přípojek) za předpokladu plného vytížení kapacity sítě (A.1) pro požadovanou průměrnou hodnotou SDR (položka E.1), zatímco výsledná průměrná hodnota P&lt;span style=&quot; vertical-align:sub;&quot;&gt;SDR&lt;/span&gt; (s UF) popisuje aktuální dopad výkonosti síťové infrastruktury v místě NTP (aktivních přípojek) s ohledem na dostupnou kapacitu sítě (položka A.1) a chování koncových uživatelů (položka B.3) dle monitoringu síťového provozu pro požadovanou průměrnou hodnotou SDR (E.1).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
             </property>
             <property name="text">
-             <string notr="true">?</string>
+             <string notr="true">3</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="out_bandwidth_min_l">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>190</y>
+              <width>241</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>E.4 Potřebná šířka pásma (L3) úzkého hrdla</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="out_capacity_min_l">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>240</y>
+              <width>241</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>E.5 Potřebná kapacita (L3) úzkého hrdla</string>
+            </property>
+           </widget>
+           <widget class="QTextBrowser" name="out_bandwidth_min">
+            <property name="geometry">
+             <rect>
+              <x>320</x>
+              <y>188</y>
+              <width>91</width>
+              <height>26</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="E4_help">
+            <property name="geometry">
+             <rect>
+              <x>620</x>
+              <y>183</y>
+              <width>41</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Výstup 4:&lt;/span&gt; Výsledná průměrná hodnota potřebné šířky pásma (L 3) v místě identifikovaného úzkého hrdla síťové infrastruktury odpovídá počtu identifikovaných koncových bodů sítě (NTP), tedy disponibilních přípojek (položka A.4), při požadované rychlosti SDR (položka E.1) v místě koncového bodu sítě (NTP). Případný způsob ověření bude vycházet ze standardu ITU-T Y.1540.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
+            </property>
+            <property name="text">
+             <string notr="true">4</string>
+            </property>
+           </widget>
+           <widget class="QTextBrowser" name="out_capacity_min">
+            <property name="geometry">
+             <rect>
+              <x>320</x>
+              <y>237</y>
+              <width>91</width>
+              <height>26</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="E5_help">
+            <property name="geometry">
+             <rect>
+              <x>620</x>
+              <y>233</y>
+              <width>41</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Výstup 5:&lt;/span&gt; Výsledná průměrná hodnota potřebné kapacity sítě (L 3) v místě identifikovaného úzkého hrdla síťové infrastruktury odpovídá počtu identifikovaných koncových bodů sítě (NTP), tedy aktivních přípojek (položka A.4), při požadované rychlosti SDR (položka E.1) a současně s dopadem typického chování koncových uživatelů dle monitoringu síťového provozu (položka B.3) v dané lokalitě v místě koncového bodu sítě (NTP). Případný způsob ověření bude vycházet ze standardu ITU-T Y.1540.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>600000</number>
+            </property>
+            <property name="text">
+             <string notr="true">5</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="out_bandwidth_min_u">
+            <property name="geometry">
+             <rect>
+              <x>420</x>
+              <y>190</y>
+              <width>41</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Mb/s</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="out_capacity_min_u">
+            <property name="geometry">
+             <rect>
+              <x>420</x>
+              <y>240</y>
+              <width>41</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Mb/s</string>
             </property>
            </widget>
           </widget>
@@ -1168,22 +1406,42 @@
   </widget>
  </widget>
  <tabstops>
-  <tabstop>scrollArea</tabstop>
   <tabstop>capacity</tabstop>
   <tabstop>mtu</tabstop>
   <tabstop>ipheader</tabstop>
   <tabstop>agg</tabstop>
   <tabstop>nbr_max</tabstop>
+  <tabstop>out_lu_max</tabstop>
   <tabstop>nbr_avg</tabstop>
   <tabstop>out_uf</tabstop>
   <tabstop>probability</tabstop>
   <tabstop>out_sdr_noUF</tabstop>
   <tabstop>out_sdr_UF</tabstop>
-  <tabstop>out_sdr_agg</tabstop>
+  <tabstop>sdr_req</tabstop>
   <tabstop>out_ntp_noUF</tabstop>
   <tabstop>out_ntp_UF</tabstop>
   <tabstop>out_perf_noUF</tabstop>
   <tabstop>out_perf_UF</tabstop>
+  <tabstop>out_bandwidth_min</tabstop>
+  <tabstop>out_capacity_min</tabstop>
+  <tabstop>A_help</tabstop>
+  <tabstop>A1_help</tabstop>
+  <tabstop>A2_help</tabstop>
+  <tabstop>A3_help</tabstop>
+  <tabstop>A4_help</tabstop>
+  <tabstop>B_help</tabstop>
+  <tabstop>B1_help</tabstop>
+  <tabstop>B2_help</tabstop>
+  <tabstop>B3_help</tabstop>
+  <tabstop>C_help</tabstop>
+  <tabstop>D_help</tabstop>
+  <tabstop>E_help</tabstop>
+  <tabstop>E1_help</tabstop>
+  <tabstop>E2_help</tabstop>
+  <tabstop>E3_help</tabstop>
+  <tabstop>E4_help</tabstop>
+  <tabstop>E5_help</tabstop>
+  <tabstop>scrollArea</tabstop>
  </tabstops>
  <resources/>
  <connections/>
