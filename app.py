@@ -56,7 +56,14 @@ class CalculatorMainWindow(QMainWindow):
         # handling of input values relation: capacity >= nbr_max > nbr_avg
         self.ui.capacity.valueChanged.connect(self.check_values_relations_capacity)
         self.ui.nbr_max.valueChanged.connect(self.check_values_relations_nbr)
+        self.ui.nbr_max.valueChanged.connect(self.check_values_relations_capacity) # also this relation can change
         self.ui.nbr_avg.valueChanged.connect(self.check_values_relations_nbr)
+        self.ui.nbr_avg.valueChanged.connect(self.check_values_relations_capacity) # also this relation can change
+        
+        # handling of incomplete input triggering calculations
+        self.ui.capacity.setKeyboardTracking(False)
+        self.ui.nbr_max.setKeyboardTracking(False)
+        self.ui.nbr_avg.setKeyboardTracking(False)
 
         ## SECTION B
         
@@ -196,9 +203,10 @@ class CalculatorMainWindow(QMainWindow):
         
         
     def check_values_relations_capacity(self):
-        """ Check logical conditions that capacity >= NBR_max. """
+        """ Check logical conditions that capacity >= NBR_max >= NBR_avg. """
         capacity = self.ui.capacity.value()
         nbr_max = self.ui.nbr_max.value()
+        nbr_avg = self.ui.nbr_avg.value()
         
         if capacity < nbr_max:
             QMessageBox.critical(self, "Nesmyslné hodnoty!", 
@@ -207,6 +215,12 @@ class CalculatorMainWindow(QMainWindow):
                                  maximální bitová rychlost NBR<span style=\" vertical-align:sub;\">max</span> (B.1) 
                                  </p></body></html> """)
             #self.ui.nbr_max.setProperty("value", capacity) # set other "linked" values
+        if capacity < nbr_avg:
+            QMessageBox.critical(self, "Nesmyslné hodnoty!", 
+                                 """ <html><head/><body><p>
+                                 Kapacita (A.1) je menší než 
+                                 průměrná bitová rychlost NBR<span style=\" vertical-align:sub;\">avg</span> (B.2) 
+                                 </p></body></html> """)
     
     def check_values_relations_nbr(self):
         """ Check logical conditions that NBR_max >= NBR_avg. """

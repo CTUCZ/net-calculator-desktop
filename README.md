@@ -4,11 +4,9 @@ Pomocný nástroj k vysvětlení problematiky vyhodnocování dopadu kapacity s�
 
 ## Zdrojový kód, použití, spuštění
 
-Ve formě spustitelné aplikace (jen pro některé OS) lze stáhnout z [úložiště](https://ctucz-my.sharepoint.com/:f:/g/personal/chalupovan_ctu_cz/EvWL756NpfNKv2IkCe6BnN0B1wUmnhr0-cDdZH7iduXcPA).
-
 V prostředí Pythonu s nainstalovanými knihovnami (`requirements.txt`) lze aplikaci spustit přímo přes hlavní skript (`app.py`).
 
-Aplikaci lze vytvořit jako spustitelnou/distribuovatelnou bez nutnosti nastavovat prostředí Pythonu a příslušných knihoven např. pomocí knihovny `pyinstaller` a vhodné konfigurace (soubory `*.spec`). Příkaz `pyinstaller .\build-onefile.spec` sestaví aplikaci do formy jednoho spustitelného souboru (pro operační systém, na kterém je sestavení spuštěno).
+Aplikaci lze vytvořit jako spustitelnou/distribuovatelnou bez nutnosti nastavovat prostředí Pythonu a příslušných knihoven např. pomocí knihovny `pyinstaller` a vhodné konfigurace (soubory `*.spec`). Příkaz `pyinstaller build-onefile.spec` sestaví aplikaci do formy jednoho spustitelného souboru (pro operační systém, na kterém je sestavení spuštěno).
 
 Více informací o možnostech distribuce např. zde: [https://docs.python-guide.org/shipping/freezing/](https://docs.python-guide.org/shipping/freezing/)
 
